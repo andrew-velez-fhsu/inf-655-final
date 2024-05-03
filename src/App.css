@@ -1,3 +1,20 @@
 body{
   background-color: goldenrod;
 }
+
+.navBar{
+  position: relative;
+}
+.navBarRight{
+  position: absolute;
+  right: 10px;
+
+}
+
+.modal, .form{
+  padding: 20px;
+}
+
+.field{
+  margin: 20px;
+}
