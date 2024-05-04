@@ -18,7 +18,6 @@ export default function Login() {
   };
 
   const handleLogout = async () => {
-    console.log("Current User:", user);
     await logout();
   };
 
@@ -72,7 +71,7 @@ export default function Login() {
             onClose={handleClose}
             anchorOrigin={{
               vertical: "bottom",
-              horizontal: "left",
+              horizontal: "right",
             }}
           >
             <div className="modal">
@@ -85,6 +84,7 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   fullWidth
                   error={errorEmail}
+                  sx={{ marginBottom: 2 }}
                 />
                 <TextField
                   label="Password"
@@ -94,6 +94,7 @@ export default function Login() {
                   fullWidth
                   onChange={(e) => setPassword(e.target.value)}
                   error={errorPassword}
+                  sx={{ marginBottom: 2 }}
                 />
 
                 <Button type="submit" variant="contained">

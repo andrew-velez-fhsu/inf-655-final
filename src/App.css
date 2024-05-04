@@ -1,5 +1,5 @@
 body{
-  background-color: goldenrod;
+  background-color: #B2F0EF;
 }
 
 .navBar{
@@ -17,4 +17,11 @@ body{
 
 .field{
   margin: 20px;
+}
+
+.footer{
+  margin-top: 3rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f7f7f7;
 }

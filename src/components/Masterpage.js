@@ -7,10 +7,10 @@ export default function Masterpage({ title, children }) {
     <Container maxWidth="md">
       <Paper>
         <Header />
-        {title && (
-          <Typography variant="h4">{title}</Typography>
-        )}
-        {children}
+        <Container>
+          {title && <Typography variant="h4">{title}</Typography>}
+          {children}
+        </Container>
         <Footer />
       </Paper>
     </Container>
