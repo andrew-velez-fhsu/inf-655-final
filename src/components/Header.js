@@ -13,7 +13,7 @@ import { UserAuth } from "../context/AuthContext";
 import { useState } from "react";
 
 export default function Header() {
-  const { user } = UserAuth();
+  const { getUserId } = UserAuth();
   const [anchorMenu, setAnchorMenu] = useState(null);
 
   const open = Boolean(anchorMenu);
@@ -84,12 +84,19 @@ export default function Header() {
                         Search
                       </Link>
                     </li>
-                    {user && (
-                      <li>
-                        <Link className="navItem" to="profile">
-                          My Profile
-                        </Link>
-                      </li>
+                    {getUserId() && (
+                      <>
+                        <li>
+                          <Link className="navItem" to="/profile">
+                            My Profile
+                          </Link>
+                        </li>
+                        <li>
+                          <Link className="navItem" to="/buddies">
+                            My Buddies
+                          </Link>
+                        </li>
+                      </>
                     )}
                   </ul>
                 </nav>

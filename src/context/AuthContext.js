@@ -1,5 +1,9 @@
 import {
+  browserLocalPersistence,
+  browserSessionPersistence,
   createUserWithEmailAndPassword,
+  getAuth,
+  setPersistence,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -10,8 +14,6 @@ import { auth } from "../firebase";
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
   const updateUser = async (record) => {
     await updateProfile(auth.currentUser, {
       displayName: `${record.firstName} ${record.lastName}`,
@@ -24,11 +26,10 @@ export const AuthContextProvider = ({ children }) => {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(record),
     });
-
-    setUser(record);
   };
 
   const registerNewUser = async (email, password, firstName, lastName) => {
+    await setPersistence(auth, browserLocalPersistence);
     let token = await createUserWithEmailAndPassword(auth, email, password);
 
     await updateProfile(auth.currentUser, {
@@ -50,33 +51,54 @@ export const AuthContextProvider = ({ children }) => {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(userRecord),
     });
-
-    setUser(userRecord);
     return token.user;
+  };
+
+  const getUserId = () => {
+    const user = auth.currentUser;
+    if (user) {
+      return user.uid;
+    } else {
+      return false;
+    }
+  };
+
+  const getProfile = async () => {
+    const token = getAuth();
+    const currentUser = token.currentUser;
+    if (currentUser) {
+      const userRecords = await (
+        await fetch(`${process.env.REACT_APP_API_URL}/users`)
+      ).json();
+      const userRecord = userRecords.find(
+        (user) => user.uid === currentUser.uid
+      );
+      if (!userRecord) throw new Error("Unable to find user id");
+      return userRecord;
+    } else {
+      return false;
+    }
   };
 
   const signIn = async (email, password) => {
+    await setPersistence(auth, browserSessionPersistence);
     let token = await signInWithEmailAndPassword(auth, email, password);
-    console.log("token", token);
-    //get user from local database
-    const userRecords = await fetch(
-      `${process.env.REACT_APP_API_URL}/users`
-    ).then((data) => data.json());
-    console.log("Users:", userRecords);
-    const userRecord = userRecords.find((user) => user.uid === token.user.uid);
-    if (userRecord) setUser(userRecord);
-    else throw new Error("Unable to find user id");
-    return token.user;
   };
 
   const logout = () => {
-    setUser(null);
     return signOut(auth);
   };
 
   return (
     <UserContext.Provider
-      value={{ registerNewUser, signIn, logout, user, updateUser }}
+      value={{
+        registerNewUser,
+        signIn,
+        logout,
+        updateUser,
+        getUserId,
+        getProfile,
+      }}
     >
       {children}
     </UserContext.Provider>

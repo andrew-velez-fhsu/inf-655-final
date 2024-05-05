@@ -3,38 +3,54 @@ import Masterpage from "../../components/Masterpage";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import { UserAuth } from "../../context/AuthContext";
-import { IconPhoto, IconUserScan } from "@tabler/icons-react";
+import { IconUserScan } from "@tabler/icons-react";
 import { styled } from "@mui/material/styles";
 import { Storage } from "../../context/StorageContext";
 import { AddAPhoto } from "@mui/icons-material";
 
 export default function Profile() {
-  const { user, updateUser } = UserAuth();
+  const { getProfile, getUserId, updateUser } = UserAuth();
   const { uploadFile } = Storage();
 
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [email, setEmail] = useState(user.email);
-  const [address1, setAddress1] = useState(user.address1 ? user.address1 : "");
-  const [address2, setAddress2] = useState(user.address2 ? user.address2 : "");
-  const [city, setCity] = useState(user.city ? user.city : "");
-  const [state, setState] = useState(user.state ? user.state : "");
-  const [postalCode, setPostalCode] = useState(
-    user.postalCode ? user.postalCode : ""
-  );
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address1, setAddress1] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [profile, setProfile] = useState({});
 
   const [errFirstName, setErrFirstName] = useState(false);
   const [errLastName, setErrLastName] = useState(false);
   const [errEmail, setErrEmail] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
+  const loadProfile = async () => {
+    const pro = await getProfile();
+    setProfile(pro);
+    setFirstName(pro.firstName);
+    setLastName(pro.lastName);
+    setEmail(pro.email);
+    setAddress1(pro.address1);
+    setAddress2(pro.address2);
+    setCity(pro.city);
+    setState(pro.state);
+    setPostalCode(pro.postalCode);
+  };
+
+  useEffect(() => {
+    loadProfile();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userRecord = {
-      ...user,
+      ...profile,
       firstName,
       lastName,
       email,
@@ -49,8 +65,8 @@ export default function Profile() {
   };
 
   const getProfilePicture = () => {
-    if (user.profileUrl) {
-      return <img width="100%" src={user.profileUrl} alt="Profile" />;
+    if (profile?.profileUrl) {
+      return <img width="100%" src={profile.profileUrl} alt="Profile" />;
     } else {
       return (
         <IconUserScan color="gray" stroke={1} width="100%" height="100%" />
@@ -73,10 +89,10 @@ export default function Profile() {
   const handleProfileUpload = async (event) => {
     const file = event.target.files[0];
     try {
-      const profileUrl = await uploadFile(file);
+      const profileUrl = await uploadFile(file, "profile");
       console.log("return success from context.", profileUrl);
       //add to profile
-      const profile = { ...user, profileUrl };
+      const profile = { ...profile, profileUrl };
       await updateUser(profile);
     } catch (err) {
       console.warn(err);
@@ -93,7 +109,7 @@ export default function Profile() {
       <Grid container spacing={2} direction="row" alignItems="stretch">
         <Grid item xs={12} md={4}>
           <Paper sx={{ minHeight: "100%", padding: "20px" }}>
-            <Stack alignItems="center">
+            <Stack alignItems="center" spacing={2}>
               {getProfilePicture()}
               <Button
                 component="label"

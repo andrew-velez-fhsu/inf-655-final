@@ -6,9 +6,9 @@ import { createContext, useContext } from "react";
 const StorageContext = createContext();
 
 export const StorageContextProvider = ({ children }) => {
-  const uploadFile = async (file) => {
+  const uploadFile = async (file, type = "image") => {
     const fileExtension = file.name.split(".").pop();
-    const fileName = `${ulid()}.${fileExtension}`;
+    const fileName = `${type}/${ulid()}.${fileExtension}`;
     const storageRef = ref(storage, fileName);
     await uploadBytes(storageRef, file);
     const fileUrl = await getDownloadURL(storageRef);

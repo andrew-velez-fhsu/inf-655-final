@@ -1,8 +1,17 @@
-import { Button, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Popover from "@mui/material/Popover";
 import { UserAuth } from "../context/AuthContext";
+import { getAuth } from "firebase/auth";
 
 export default function Login() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -10,8 +19,11 @@ export default function Login() {
   const [errorPassword, setErrorPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoginFailed, setIsLoginFailed] = useState(false);
 
-  const { signIn, logout, user } = UserAuth();
+  const { signIn, logout, getUserId } = UserAuth();
+
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -19,10 +31,15 @@ export default function Login() {
 
   const handleLogout = async () => {
     await logout();
+    navigate("/");
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLoginWarningClose = () => {
+    setIsLoginFailed(false);
   };
 
   const open = Boolean(anchorEl);
@@ -40,17 +57,17 @@ export default function Login() {
 
     if (email && password) {
       try {
-        let user = await signIn(email, password);
-        console.log(user);
+        await signIn(email, password);
         setAnchorEl(null);
       } catch (err) {
         console.error(err);
+        setIsLoginFailed(true);
       }
     }
   };
 
   const authenticationButton = () => {
-    if (user) {
+    if (getUserId()) {
       return (
         <Button aria-describedby={id} variant="text" onClick={handleLogout}>
           Log out
@@ -98,6 +115,21 @@ export default function Login() {
                 <Button type="submit" variant="contained">
                   Login
                 </Button>
+                <Dialog
+                  open={isLoginFailed}
+                  onClose={handleLoginWarningClose}
+                  aria-describedby="login-failed-text"
+                >
+                  <DialogContent>
+                    <DialogContentText id="login-failed-text">
+                      Unable to log in. Check your user name and passsword, and
+                      try again
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleLoginWarningClose}>OK</Button>
+                  </DialogActions>
+                </Dialog>
               </form>
               <Typography>
                 Don't have an account?{" "}

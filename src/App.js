@@ -9,28 +9,44 @@ import { AuthContextProvider } from "./context/AuthContext";
 
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { StorageContextProvider } from "./context/StorageContext";
+import Buddies from "./pages/buddies/Buddies";
+import { PetsContextProvider } from "./context/PetsContext";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 function App() {
   return (
     <>
       <AuthContextProvider>
         <StorageContextProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/details" element={<Details />} />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/profile/create" element={<CreateAccount />} />
-            </Routes>
-          </BrowserRouter>
+          <PetsContextProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/details" element={<Details />} />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProtectedRoute>
+                        <Profile />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/buddies"
+                    element={
+                      <ProtectedRoute>
+                        <Buddies />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/profile/create" element={<CreateAccount />} />
+                </Routes>
+              </BrowserRouter>
+            </LocalizationProvider>
+          </PetsContextProvider>
         </StorageContextProvider>
       </AuthContextProvider>
     </>
