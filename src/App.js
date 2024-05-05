@@ -6,28 +6,32 @@ import Details from "./pages/details/Details";
 import Profile from "./pages/profile/Profile";
 import CreateAccount from "./pages/profile/create/CreateAccount";
 import { AuthContextProvider } from "./context/AuthContext";
+
 import ProtectedRoute from "./utils/ProtectedRoute";
+import { StorageContextProvider } from "./context/StorageContext";
 
 function App() {
   return (
     <>
       <AuthContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/details" element={<Details />} />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/profile/create" element={<CreateAccount />} />
-          </Routes>
-        </BrowserRouter>
+        <StorageContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/details" element={<Details />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/profile/create" element={<CreateAccount />} />
+            </Routes>
+          </BrowserRouter>
+        </StorageContextProvider>
       </AuthContextProvider>
     </>
   );

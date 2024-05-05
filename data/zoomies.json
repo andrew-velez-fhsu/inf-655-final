@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "id": "735b",
+      "displayName": "Andrew Velez",
+      "firstName": "Andrew",
+      "lastName": "Velez",
+      "uid": "tMXUkEQC4IX8NwRpGBwHz4niFOw1",
+      "email": "andrewjvelez+4@gmail.com"
+    },
+    {
+      "id": "1000",
+      "displayName": "Andrew Velez (Admin)",
+      "firstName": "Andrew",
+      "lastName": "Velez",
+      "uid": "oMxi1bPQjObWhrz1EiV8PRIOTMb2",
+      "email": "andrewjvelez@gmail.com",
+      "address1": "49 Browning Dr",
+      "address2": "",
+      "city": "Ossining",
+      "state": "NY",
+      "postalCode": "10562",
+      "profileUrl": "https://firebasestorage.googleapis.com/v0/b/inf655final-av.appspot.com/o/01HX4W9JW407V3Y61N56TGBQBN.png?alt=media&token=f8b28b8b-d8a2-4a28-ad18-9cb00d702802"
+    }
+  ],
+  "pets": []
+}

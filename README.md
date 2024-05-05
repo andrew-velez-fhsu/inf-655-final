@@ -1,6 +1,6 @@
 Prerequisites:
 Json-server: `npm install json-server -g`
-Run Json-server `json-server data/buddies.json`
+Run Json-server `npx json-server --watch data/zoomies.json --port 8000`
 
 # Getting Started with Create React App
 

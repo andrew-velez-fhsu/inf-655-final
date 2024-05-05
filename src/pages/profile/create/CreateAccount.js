@@ -43,17 +43,7 @@ export default function CreateAccount() {
       try {
         console.log("Valid data");
 
-        const reg = {
-          apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-          authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-          projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-          storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-          messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-          appId: process.env.REACT_APP_FIREBASE_APP_ID,
-        };
-        console.log(reg);
-
-        await registerNewUser(email, password);
+        await registerNewUser(email, password, firstName, lastName);
         navigate("/");
       } catch (err) {
         console.error(err);
@@ -72,22 +62,22 @@ export default function CreateAccount() {
       <Paper className="form">
         <form noValidate onSubmit={handleSubmit}>
           <TextField
-            className="field"
             label="First Name"
             variant="outlined"
             fullWidth
             required
             onChange={(e) => setFirstName(e.target.value)}
             error={errFirstName}
+            sx={{ marginBottom: "1rem" }}
           />
           <TextField
-            className="field"
             label="Last Name"
             variant="outlined"
             fullWidth
             required
             onChange={(e) => setLastName(e.target.value)}
             error={errLastName}
+            sx={{ marginBottom: "1rem" }}
           />
           <TextField
             label="Email address"
@@ -96,6 +86,7 @@ export default function CreateAccount() {
             required
             onChange={(e) => setEmail(e.target.value)}
             error={errEmail}
+            sx={{ marginBottom: "1rem" }}
           />
           <TextField
             label="Password"
@@ -105,6 +96,7 @@ export default function CreateAccount() {
             required
             onChange={(e) => setPassword(e.target.value)}
             error={errPassword}
+            sx={{ marginBottom: "1rem" }}
           />
           <TextField
             label="Confirm Password"
@@ -114,12 +106,13 @@ export default function CreateAccount() {
             required
             onChange={(e) => setConfirmedPassword(e.target.value)}
             error={errConfirmedPassword}
+            sx={{ marginBottom: "1rem" }}
           />
           <Button variant="contained" color="primary" type="submit">
             Submit
           </Button>
         </form>
-        <Typography>
+        <Typography sx={{ marginTop: "0.5rem" }}>
           <Link to="/">Go back to homepage</Link>
         </Typography>
       </Paper>

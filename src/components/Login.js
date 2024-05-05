@@ -39,8 +39,6 @@ export default function Login() {
     if (password === "") setErrorPassword(true);
 
     if (email && password) {
-      console.log(`email: ${email}, password: ${password}`);
-
       try {
         let user = await signIn(email, password);
         console.log(user);

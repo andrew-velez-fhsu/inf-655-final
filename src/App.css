@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 body{
   background-color: #B2F0EF;
+}
+.title{
+  font-family: Yellowtail, Verdana, Geneva, Tahoma, sans-serif;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #333333;
+  color: goldenrod
+}
+
+.subTitle{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .navBar{
@@ -24,4 +35,29 @@ body{
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #f7f7f7;
+}
+
+.links{
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.navigation ul{
+  list-style-type: none;
+  margin:10px;  
+  padding-left: 0;
+}
+
+.navigation ul li{
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  padding:10px;    
+}
+
+.navItem{
+  color:inherit;
+  text-decoration: none;
+}
+
+.navItem:hover{
+  text-decoration: underline;
 }

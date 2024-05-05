@@ -4,7 +4,7 @@ import Header from "./Header";
 
 export default function Masterpage({ title, children }) {
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg">
       <Paper>
         <Header />
         <Container>

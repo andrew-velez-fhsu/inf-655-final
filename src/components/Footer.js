@@ -1,40 +1,50 @@
 import {
-  faFacebook,
-  faInstagram,
+  faSquareFacebook,
+  faSquareInstagram,
   faSquareTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Divider, Grid, Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 
 export default function Footer() {
   return (
     <>
       <footer className="footer">
-        <Typography align="center">ZoomBuddy.com</Typography>
-        <Stack spacing={5} direction="row">
-          <Item>
-            <Typography align="center" variant="subtitle2">
-              About
-            </Typography>
-          </Item>
-          <Item>
-            <Typography align="center" variant="subtitle2">
-              <a href="mailto:a_velez4@mail.fhsu.edu">Contact</a>
-            </Typography>
-          </Item>
+        <Stack
+          justifyContent="center"
+          spacing={15}
+          align="center"
+          direction="row"
+        >
+          <Typography align="center" variant="subtitle2">
+            About
+          </Typography>
+          <Typography align="center" variant="subtitle2">
+            <a href="mailto:a_velez4@mail.fhsu.edu">Contact</a>
+          </Typography>
         </Stack>
 
-        <Divider />
-        <Stack spacing={3} direction="row">
-          <Item>
-            <FontAwesomeIcon icon={faSquareTwitter} />
-          </Item>
-          <Item>
-            <FontAwesomeIcon icon={faSquareInstagram} />
-          </Item>
-          <Item>
-            <FontAwesomeIcon icon={faSquareFacebook} />
-          </Item>
+        <Divider variant="middle" />
+
+        <div className="links">
+          <Stack
+            justifyContent="center"
+            spacing={15}
+            align="center"
+            direction="row"
+          >
+            <FontAwesomeIcon size="2x" icon={faSquareTwitter} />
+
+            <FontAwesomeIcon size="2x" icon={faSquareInstagram} />
+            <FontAwesomeIcon size="2x" icon={faSquareFacebook} />
+          </Stack>
+        </div>
+        <Stack justifyContent="center" align="center">
+          <Typography variant="button" align="center">
+            ZoomBuddy.com
+          </Typography>
+          <Typography variant="caption">&copy;2024</Typography>
+          <Typography variant="caption">Privacy - Terms</Typography>
         </Stack>
       </footer>
     </>

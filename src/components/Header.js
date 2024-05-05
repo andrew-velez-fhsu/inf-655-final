@@ -3,14 +3,12 @@ import Login from "./Login";
 import {
   AppBar,
   Box,
-  Button,
   IconButton,
   Popover,
   Toolbar,
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Margin } from "@mui/icons-material";
 import { UserAuth } from "../context/AuthContext";
 import { useState } from "react";
 
@@ -37,10 +35,16 @@ export default function Header() {
           sx={{ backgroundColor: "#fefefe", color: "#111111" }}
         >
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography
+              className="title"
+              variant="h3"
+              component="h1"
+              sx={{ flexGrow: 1 }}
+            >
               Zoomy Buddy
             </Typography>
             <Typography
+              className="subTitle"
               variant="subtitle1"
               component="div"
               sx={{ flexGrow: 1, fontStyle: "italic" }}
@@ -68,17 +72,23 @@ export default function Header() {
               }}
             >
               <div>
-                <nav>
+                <nav className="navigation">
                   <ul>
                     <li>
-                      <Link to="/">Home</Link>
+                      <Link className="navItem" to="/">
+                        Home
+                      </Link>
                     </li>
                     <li>
-                      <Link to="/search">Search</Link>
+                      <Link className="navItem" to="/search">
+                        Search
+                      </Link>
                     </li>
                     {user && (
                       <li>
-                        <Link to="profile">My Profile</Link>
+                        <Link className="navItem" to="profile">
+                          My Profile
+                        </Link>
                       </li>
                     )}
                   </ul>
