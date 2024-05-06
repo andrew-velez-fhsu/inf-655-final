@@ -63,6 +63,16 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const getCurrentUserDisplayName = () => {
+    const user = auth.currentUser;
+    console.log("user", user);
+    if (user) {
+      return user.displayName;
+    } else {
+      return "";
+    }
+  };
+
   const getProfile = async () => {
     const token = getAuth();
     const currentUser = token.currentUser;
@@ -98,6 +108,7 @@ export const AuthContextProvider = ({ children }) => {
         updateUser,
         getUserId,
         getProfile,
+        getCurrentUserDisplayName,
       }}
     >
       {children}

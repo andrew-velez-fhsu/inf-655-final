@@ -20,13 +20,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginFailed, setIsLoginFailed] = useState(false);
-  const [displayName, setDisplayName] = useState("");
 
   const { signIn, getUserId, getProfile } = UserAuth();
-
-  useEffect(() => {
-    getProfile().then((profile) => setDisplayName(profile.displayName));
-  }, []);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -68,7 +63,7 @@ export default function Login() {
     if (getUserId()) {
       return (
         <Typography variant="caption" sx={{ marginRight: "0.5rem" }}>
-          Welcome back {displayName}!
+          Welcome back!
         </Typography>
       );
     } else {
