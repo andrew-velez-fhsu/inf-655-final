@@ -1,20 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import {
   AppBar,
   Box,
+  Divider,
   IconButton,
   Popover,
   Toolbar,
   Typography,
+  Button,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { UserAuth } from "../context/AuthContext";
 import { useState } from "react";
 
 export default function Header() {
-  const { getUserId } = UserAuth();
+  const { logout, getUserId } = UserAuth();
   const [anchorMenu, setAnchorMenu] = useState(null);
+
+  const navigate = useNavigate();
 
   const open = Boolean(anchorMenu);
   const id = open ? "menu-popover" : undefined;
@@ -25,6 +29,11 @@ export default function Header() {
 
   const handleMenuClose = () => {
     setAnchorMenu(null);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
   };
 
   return (
@@ -95,6 +104,16 @@ export default function Header() {
                           <Link className="navItem" to="/buddies">
                             My Buddies
                           </Link>
+                        </li>
+                        <li>
+                          <Divider />
+                          <Button
+                            aria-describedby={id}
+                            variant="text"
+                            onClick={handleLogout}
+                          >
+                            Log out
+                          </Button>
                         </li>
                       </>
                     )}

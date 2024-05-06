@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { IconDog } from "@tabler/icons-react";
 import { styled } from "@mui/material/styles";
-import { AddAPhoto } from "@mui/icons-material";
+import { AddAPhoto, Delete } from "@mui/icons-material";
 import { Storage } from "../context/StorageContext";
 import { useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -205,6 +205,9 @@ export default function EditBuddy({ buddy }) {
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               />
             </form>
+            <Button variant="secondary" startIcon={<Delete />}>
+              Delete
+            </Button>
           </Stack>
         </Grid>
       </Grid>

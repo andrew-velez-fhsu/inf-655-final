@@ -20,18 +20,16 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginFailed, setIsLoginFailed] = useState(false);
+  const [displayName, setDisplayName] = useState("");
 
-  const { signIn, logout, getUserId } = UserAuth();
+  const { signIn, getUserId, getProfile } = UserAuth();
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    getProfile().then((profile) => setDisplayName(profile.displayName));
+  }, []);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleLogout = async () => {
-    await logout();
-    navigate("/");
   };
 
   const handleClose = () => {
@@ -69,14 +67,19 @@ export default function Login() {
   const authenticationButton = () => {
     if (getUserId()) {
       return (
-        <Button aria-describedby={id} variant="text" onClick={handleLogout}>
-          Log out
-        </Button>
+        <Typography variant="caption" sx={{ marginRight: "0.5rem" }}>
+          Welcome back {displayName}!
+        </Typography>
       );
     } else {
       return (
         <>
-          <Button aria-describedby={id} variant="text" onClick={handleClick}>
+          <Button
+            aria-describedby={id}
+            variant="contained"
+            sx={{ marginRight: "0.5rem" }}
+            onClick={handleClick}
+          >
             Log in
           </Button>
           <Popover

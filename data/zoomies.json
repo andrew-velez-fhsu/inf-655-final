@@ -22,6 +22,14 @@
       "state": "NY",
       "postalCode": "10562",
       "profileUrl": "https://firebasestorage.googleapis.com/v0/b/inf655final-av.appspot.com/o/01HX4W9JW407V3Y61N56TGBQBN.png?alt=media&token=f8b28b8b-d8a2-4a28-ad18-9cb00d702802"
+    },
+    {
+      "id": "5dea",
+      "displayName": "Tamir Velez",
+      "firstName": "Tamir",
+      "lastName": "Velez",
+      "uid": "0BVWNnncglV0l47pFvArzXJXX8y1",
+      "email": "tamirvelez@gmail.com"
     }
   ],
   "pets": [
@@ -57,6 +65,17 @@
       "birthday": "2023-07-15T04:00:00.000Z",
       "photoUrl": "https://firebasestorage.googleapis.com/v0/b/inf655final-av.appspot.com/o/pets%2F01HX5GJ534BP7JX7RZHCC2W67R.jpg?alt=media&token=9e31bb5d-0032-4d84-b56c-a5a4d002d1eb",
       "isGoodWithChildren": true,
+      "isResourceProtective": false
+    },
+    {
+      "uid": "0BVWNnncglV0l47pFvArzXJXX8y1",
+      "id": "01HX5JRC2DT7N171DG01THDMMD",
+      "name": "Gypsy",
+      "description": "woof",
+      "breed": "woofy",
+      "birthday": null,
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/inf655final-av.appspot.com/o/pets%2F01HX5JSQY6FDMY51TC0BX7XSZK.jpg?alt=media&token=e3964bb6-d900-4503-9828-36dde92f306b",
+      "isGoodWithChildren": false,
       "isResourceProtective": false
     }
   ]
