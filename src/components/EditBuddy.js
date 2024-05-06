@@ -14,12 +14,14 @@ import { IconDog } from "@tabler/icons-react";
 import { styled } from "@mui/material/styles";
 import { AddAPhoto, Delete } from "@mui/icons-material";
 import { Storage } from "../context/StorageContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import { Pets } from "../context/PetsContext";
+import { UserAuth } from "../context/AuthContext";
 import dayjs from "dayjs";
 
 export default function EditBuddy({ buddy }) {
+  const [userProfile, setUserProfile] = useState(null);
   const [buddyProfile, setBuddyProfile] = useState(buddy);
   const [name, setName] = useState(buddyProfile.name ? buddyProfile.name : "");
   const [description, setDescription] = useState(
@@ -50,6 +52,11 @@ export default function EditBuddy({ buddy }) {
 
   const { uploadFile } = Storage();
   const { updatePet } = Pets();
+  const { getProfile } = UserAuth();
+
+  useEffect(() => {
+    getProfile().then((profile) => setUserProfile(profile));
+  }, []);
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -77,7 +84,7 @@ export default function EditBuddy({ buddy }) {
 
       setPhotoUrl(profileUrl);
       //update pet
-      await updatePet({ ...buddyProfile, photoUrl: profileUrl });
+      await updatePet({ ...buddyProfile, photoUrl: profileUrl }, userProfile);
     } catch (err) {
       console.warn(err);
     }
@@ -94,7 +101,7 @@ export default function EditBuddy({ buddy }) {
       isGoodWithChildren,
       isResourceProtective,
     };
-    await updatePet(updatedPet);
+    await updatePet(updatedPet, userProfile);
     setBuddyProfile(updatedPet);
     setIsSaved(true);
   };

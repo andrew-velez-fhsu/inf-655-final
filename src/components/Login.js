@@ -7,11 +7,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import Popover from "@mui/material/Popover";
 import { UserAuth } from "../context/AuthContext";
-import { getAuth } from "firebase/auth";
 
 export default function Login() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -21,7 +20,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isLoginFailed, setIsLoginFailed] = useState(false);
 
-  const { signIn, getUserId, getProfile } = UserAuth();
+  const { signIn, getUserId } = UserAuth();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

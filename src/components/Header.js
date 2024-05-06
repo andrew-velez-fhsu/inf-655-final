@@ -45,10 +45,15 @@ export default function Header() {
         >
           <Toolbar>
             <Typography
-              className="title"
               variant="h3"
               component="h1"
-              sx={{ flexGrow: 1 }}
+              sx={{
+                fontFamily: "Yellowtail, Verdana, Geneva, Tahoma, sans-serif",
+                WebkitTextStrokeWidth: "1px",
+                WebkitTextStrokeColor: "#333333",
+                color: "goldenrod",
+                marginRight: "2rem",
+              }}
             >
               Zoomy Buddy
             </Typography>
@@ -56,7 +61,13 @@ export default function Header() {
               className="subTitle"
               variant="subtitle1"
               component="div"
-              sx={{ flexGrow: 1, fontStyle: "italic" }}
+              sx={{
+                flexGrow: 2,
+                fontStyle: "italic",
+                fontFamily:
+                  "Cambria, Cochin, Georgia, Times, 'Times New Roman', serif",
+                display: { xs: "none", md: "block" },
+              }}
             >
               Looks like your best friend is gonna make a new friend!
             </Typography>

@@ -2,16 +2,7 @@
 body{
   background-color: #B2F0EF;
 }
-.title{
-  font-family: Yellowtail, Verdana, Geneva, Tahoma, sans-serif;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #333333;
-  color: goldenrod
-}
 
-.subTitle{
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
 
 .navBar{
   position: relative;
@@ -60,4 +51,19 @@ body{
 
 .navItem:hover{
   text-decoration: underline;
+}
+
+.pet-profile{
+  max-height: 400px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid #666;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.details-icon{
+  color: #1976d2;
 }

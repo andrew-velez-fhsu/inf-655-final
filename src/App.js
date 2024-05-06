@@ -13,6 +13,8 @@ import Buddies from "./pages/buddies/Buddies";
 import { PetsContextProvider } from "./context/PetsContext";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import NotFound from "./pages/notFound/NotFound";
+import BuddyDetails from "./pages/buddies/BuddyDetails";
 
 function App() {
   return (
@@ -42,7 +44,16 @@ function App() {
                       </ProtectedRoute>
                     }
                   />
+                  <Route
+                    path="/buddies/:id"
+                    element={
+                      <ProtectedRoute>
+                        <BuddyDetails />
+                      </ProtectedRoute>
+                    }
+                  />
                   <Route path="/profile/create" element={<CreateAccount />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </BrowserRouter>
             </LocalizationProvider>

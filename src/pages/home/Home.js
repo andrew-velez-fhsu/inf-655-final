@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 
 import logo from "../../assets/logo.jpg";
 import Masterpage from "../../components/Masterpage";
@@ -16,17 +16,23 @@ export default function Home() {
             <img src={logo} alt="logo" />
           </Grid>
           <Grid item xs={12} md={8} alignContent="center">
-            <TextField
-              placeholder="i.e. Ossining, poodle, or Fido"
-              color="secondary"
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-              sx={{ flexGrow: 1 }}
-            ></TextField>
-            <Button variant="contained" color="secondary" endIcon={<Search />}>
-              Search
-            </Button>
+            <Box sx={{ display: "flex" }}>
+              <TextField
+                placeholder="i.e. Ossining, poodle, or Fido"
+                color="secondary"
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                sx={{ flexGrow: 1 }}
+              ></TextField>
+              <Button
+                variant="contained"
+                color="secondary"
+                endIcon={<Search />}
+              >
+                Search
+              </Button>
+            </Box>
           </Grid>
         </Grid>
 

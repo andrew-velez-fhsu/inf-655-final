@@ -27,16 +27,57 @@ export const PetsContextProvider = ({ children }) => {
     return pet;
   };
 
-  const updatePet = async (profile) => {
-    await fetch(`${process.env.REACT_APP_API_URL}/pets/${profile.id}`, {
+  const updatePet = async (petProfile, userProfile) => {
+    const record = { ...petProfile };
+    if (userProfile) {
+      record["location"] = `${userProfile.city}, ${userProfile.state}`;
+    }
+
+    await fetch(`${process.env.REACT_APP_API_URL}/pets/${petProfile.id}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify(profile),
+      body: JSON.stringify(record),
     });
   };
 
+  const getPets = async (props) => {
+    let pets = await fetch(`${process.env.REACT_APP_API_URL}/pets`).then(
+      (data) => data.json()
+    );
+
+    if (props.search) {
+      pets = pets.filter(
+        (pet) =>
+          pet.name.toLowerCase().includes(props.search.toLowerCase()) ||
+          pet.description.toLowerCase().includes(props.search.toLowerCase()) ||
+          pet.breed.toLowerCase().includes(props.search.toLowerCase())
+      );
+    }
+    if (props.isGoodWithChildren !== undefined) {
+      pets = pets.filter(
+        (pet) => pet.isGoodWithChildren === props.isGoodWithChildren
+      );
+    }
+    if (props.isResourceProtective !== undefined) {
+      pets = pets.filter(
+        (pet) => pet.isResourceProtective === props.isResourceProtective
+      );
+    }
+    return pets;
+  };
+
+  const getPet = async (id) => {
+    const pet = await fetch(`${process.env.REACT_APP_API_URL}/pets/${id}`).then(
+      (data) => data.json()
+    );
+
+    return pet;
+  };
+
   return (
-    <PetsContext.Provider value={{ pets, getPetsByUser, addNewPet, updatePet }}>
+    <PetsContext.Provider
+      value={{ pets, getPetsByUser, addNewPet, updatePet, getPets, getPet }}
+    >
       {children}
     </PetsContext.Provider>
   );
