@@ -24,8 +24,6 @@ export default function CreateAccount() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Attempting registration");
-
     setErrFirstName(firstName === "");
     setErrLastName(lastName === "");
     setErrEmail(email === "");
@@ -41,8 +39,6 @@ export default function CreateAccount() {
       password === confirmedPassword
     ) {
       try {
-        console.log("Valid data");
-
         await registerNewUser(email, password, firstName, lastName);
         navigate("/profile");
       } catch (err) {

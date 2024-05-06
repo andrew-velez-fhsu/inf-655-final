@@ -14,6 +14,8 @@ import { auth } from "../firebase";
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const updateUser = async (record) => {
     await updateProfile(auth.currentUser, {
       displayName: `${record.firstName} ${record.lastName}`,
@@ -51,21 +53,23 @@ export const AuthContextProvider = ({ children }) => {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(userRecord),
     });
+    setIsLoggedIn(true);
     return token.user;
   };
 
   const getUserId = () => {
     const user = auth.currentUser;
     if (user) {
+      setIsLoggedIn(true);
       return user.uid;
     } else {
+      setIsLoggedIn(false);
       return false;
     }
   };
 
   const getCurrentUserDisplayName = () => {
     const user = auth.currentUser;
-    console.log("user", user);
     if (user) {
       return user.displayName;
     } else {
@@ -93,9 +97,11 @@ export const AuthContextProvider = ({ children }) => {
   const signIn = async (email, password) => {
     await setPersistence(auth, browserSessionPersistence);
     let token = await signInWithEmailAndPassword(auth, email, password);
+    setIsLoggedIn(true);
   };
 
   const logout = () => {
+    setIsLoggedIn(false);
     return signOut(auth);
   };
 
@@ -109,6 +115,7 @@ export const AuthContextProvider = ({ children }) => {
         getUserId,
         getProfile,
         getCurrentUserDisplayName,
+        isLoggedIn,
       }}
     >
       {children}

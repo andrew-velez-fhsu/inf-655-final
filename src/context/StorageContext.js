@@ -12,7 +12,6 @@ export const StorageContextProvider = ({ children }) => {
     const storageRef = ref(storage, fileName);
     await uploadBytes(storageRef, file);
     const fileUrl = await getDownloadURL(storageRef);
-    console.log("Uploaded file");
     return fileUrl;
   };
 

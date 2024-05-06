@@ -78,7 +78,6 @@ export default function BuddyDetails() {
               component: "form",
               onSubmit: (e) => {
                 e.preventDefault();
-                console.log("Submit contact request");
                 handleCloseContactModal();
               },
             }}

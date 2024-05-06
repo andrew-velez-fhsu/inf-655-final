@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Popover from "@mui/material/Popover";
 import { UserAuth } from "../context/AuthContext";
@@ -19,6 +19,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginFailed, setIsLoginFailed] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const { signIn, getUserId } = UserAuth();
 
@@ -58,8 +59,14 @@ export default function Login() {
     }
   };
 
+  useEffect(() => {
+    const userIsLoggedIn = getUserId();
+    console.log("user logged in", userIsLoggedIn);
+    setIsLoggedIn(getUserId());
+  }, [getUserId]);
+
   const authenticationButton = () => {
-    if (getUserId()) {
+    if (isLoggedIn) {
       return (
         <Typography variant="caption" sx={{ marginRight: "0.5rem" }}>
           Welcome back!

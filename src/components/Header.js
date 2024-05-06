@@ -15,7 +15,7 @@ import { UserAuth } from "../context/AuthContext";
 import { useState } from "react";
 
 export default function Header() {
-  const { logout, getUserId } = UserAuth();
+  const { logout, getUserId, isLoggedIn } = UserAuth();
   const [anchorMenu, setAnchorMenu] = useState(null);
 
   const navigate = useNavigate();
@@ -104,7 +104,7 @@ export default function Header() {
                         Search
                       </Link>
                     </li>
-                    {getUserId() && (
+                    {isLoggedIn && (
                       <>
                         <li>
                           <Link className="navItem" to="/profile">

@@ -103,6 +103,18 @@
       "isGoodWithChildren": false,
       "isResourceProtective": false,
       "location": "Ossining, New York"
+    },
+    {
+      "uid": "oMxi1bPQjObWhrz1EiV8PRIOTMb2",
+      "id": "01HX7NNRJJFVWCXQ2K9871YFFG",
+      "name": "Rocket",
+      "description": "I'm a racoon",
+      "breed": "Racoon",
+      "birthday": "2005-12-15T05:00:00.000Z",
+      "photoUrl": null,
+      "isGoodWithChildren": false,
+      "isResourceProtective": false,
+      "location": "Ossining, NY"
     }
   ]
 }

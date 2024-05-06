@@ -90,7 +90,6 @@ export default function Profile() {
     const file = event.target.files[0];
     try {
       const profileUrl = await uploadFile(file, "profile");
-      console.log("return success from context.", profileUrl);
       //add to profile
       const profile = { ...profile, profileUrl };
       await updateUser(profile);

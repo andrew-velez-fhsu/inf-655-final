@@ -4,9 +4,15 @@ import logo from "../../assets/logo.jpg";
 import Masterpage from "../../components/Masterpage";
 import { Search } from "@mui/icons-material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search?search=${encodeURI(search)}`);
+  };
 
   return (
     <>
@@ -16,23 +22,26 @@ export default function Home() {
             <img src={logo} alt="logo" />
           </Grid>
           <Grid item xs={12} md={8} alignContent="center">
-            <Box sx={{ display: "flex" }}>
-              <TextField
-                placeholder="i.e. Ossining, poodle, or Fido"
-                color="secondary"
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                }}
-                sx={{ flexGrow: 1 }}
-              ></TextField>
-              <Button
-                variant="contained"
-                color="secondary"
-                endIcon={<Search />}
-              >
-                Search
-              </Button>
-            </Box>
+            <form noValidate onSubmit={handleSearch}>
+              <Box sx={{ display: "flex" }}>
+                <TextField
+                  placeholder="i.e. Ossining, poodle, or Fido"
+                  color="secondary"
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                  sx={{ flexGrow: 1 }}
+                ></TextField>
+                <Button
+                  autoFocus
+                  variant="contained"
+                  color="secondary"
+                  endIcon={<Search />}
+                >
+                  Search
+                </Button>
+              </Box>
+            </form>
           </Grid>
         </Grid>
 

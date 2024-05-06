@@ -50,7 +50,8 @@ export const PetsContextProvider = ({ children }) => {
         (pet) =>
           pet.name.toLowerCase().includes(props.search.toLowerCase()) ||
           pet.description.toLowerCase().includes(props.search.toLowerCase()) ||
-          pet.breed.toLowerCase().includes(props.search.toLowerCase())
+          pet.breed.toLowerCase().includes(props.search.toLowerCase()) ||
+          pet.location?.toLowerCase().includes(props.search.toLowerCase())
       );
     }
     if (props.isGoodWithChildren !== undefined) {
