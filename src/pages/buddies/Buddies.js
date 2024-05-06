@@ -17,9 +17,7 @@ export default function Buddies() {
   const uid = getUserId();
 
   const getPets = async () => {
-    console.log("uid", uid);
     const myPets = await getPetsByUser(uid);
-    console.log("myPets", myPets);
     setBuddies(myPets);
   };
 
@@ -28,10 +26,7 @@ export default function Buddies() {
   }, []);
 
   const handleAddBuddy = async () => {
-    console.log("before buddies", buddies);
     const newPet = await addNewPet(uid);
-    console.log("newPet", newPet);
-
     setBuddies([newPet, ...buddies]);
   };
 

@@ -44,7 +44,7 @@ export default function CreateAccount() {
         console.log("Valid data");
 
         await registerNewUser(email, password, firstName, lastName);
-        navigate("/");
+        navigate("/profile");
       } catch (err) {
         console.error(err);
       }
