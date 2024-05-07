@@ -65,6 +65,10 @@ point, the search service returns all pets, and then searches the following fiel
 
 If you search with no search terms, all the pets in the database are return.
 
+As a registered user, you can view the pets' details and send a message to the owner of the pet, so that
+you can arrange a play date between the two users. Note that this is a mockup, and no actual message is sent,
+only a console.log message records the button has been clicked.
+
 Images are saved to Google Firebase's storage account. They are saved using the original resolution. A future
 enhancement would be to create thumbnails server side, and serve different resolutions on the search card and
 profile pages.

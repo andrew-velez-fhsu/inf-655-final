@@ -12,7 +12,7 @@ import { Storage } from "../../context/StorageContext";
 import { AddAPhoto } from "@mui/icons-material";
 
 export default function Profile() {
-  const { getProfile, getUserId, updateUser } = UserAuth();
+  const { getProfile, updateUser } = UserAuth();
   const { uploadFile } = Storage();
 
   const [firstName, setFirstName] = useState("");

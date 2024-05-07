@@ -13,6 +13,7 @@ import {
   DialogTitle,
   Grid,
   Paper,
+  Snackbar,
   Stack,
   TextField,
   Typography,
@@ -29,7 +30,9 @@ import { IconBone } from "@tabler/icons-react";
 export default function BuddyDetails() {
   const { id } = useParams();
   const [buddy, setBuddy] = useState(null);
+  const [message, setMessage] = useState("");
   const [showContactModal, setShowContactModal] = useState(false);
+  const [showContactSuccessful, setShowContactSuccessful] = useState(false);
   const { getPet } = Pets();
 
   useEffect(() => {
@@ -78,6 +81,8 @@ export default function BuddyDetails() {
               component: "form",
               onSubmit: (e) => {
                 e.preventDefault();
+                console.log("message:", message);
+                setShowContactSuccessful(true);
                 handleCloseContactModal();
               },
             }}
@@ -95,6 +100,8 @@ export default function BuddyDetails() {
                 variant="outlined"
                 multiline
                 fullWidth
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 minRows={2}
               />
             </DialogContent>
@@ -105,6 +112,13 @@ export default function BuddyDetails() {
               </Button>
             </DialogActions>
           </Dialog>
+          <Snackbar
+            open={showContactSuccessful}
+            autoHideDuration={5000}
+            onClose={() => setShowContactSuccessful(false)}
+            message="Message sent!"
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          />
           <Grid container spacing={2} sx={{ marginTop: "1rem" }}>
             <Grid item xs={12} md={6}>
               <Typography gutterBottom variant="h6">

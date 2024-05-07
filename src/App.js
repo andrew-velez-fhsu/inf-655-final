@@ -2,7 +2,6 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/home/Home";
 import Search from "./pages/search/Search";
-import Details from "./pages/details/Details";
 import Profile from "./pages/profile/Profile";
 import CreateAccount from "./pages/profile/create/CreateAccount";
 import { AuthContextProvider } from "./context/AuthContext";
@@ -27,7 +26,6 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/search" element={<Search />} />
-                  <Route path="/details" element={<Details />} />
                   <Route
                     path="/profile"
                     element={
