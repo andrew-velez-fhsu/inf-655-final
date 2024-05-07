@@ -29,7 +29,9 @@ export default function Search() {
     const searchParams = {
       search: search,
     };
+
     const foundPets = await getPets(searchParams);
+
     setPets(foundPets);
   };
 
@@ -67,6 +69,7 @@ export default function Search() {
                     variant="outlined"
                     aria-label="search"
                     color="secondary"
+                    type="submit"
                   >
                     <SearchIcon />
                   </Button>

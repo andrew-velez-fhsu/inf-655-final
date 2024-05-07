@@ -37,6 +37,7 @@ export default function Home() {
                   variant="contained"
                   color="secondary"
                   endIcon={<Search />}
+                  type="submit"
                 >
                   Search
                 </Button>
